@@ -1,0 +1,16 @@
+<div class="task-form">
+  <input [(ngModel)]="newTitle" placeholder="Task Title" />
+  <input [(ngModel)]="newDescription" placeholder="Task Description" />
+  <button (click)="editId === null ? addTask() : saveTask()">
+    {{ editId === null ? 'Add Task' : 'Save Task' }}
+  </button>
+</div>
+
+<div class="task-list">
+  <div *ngFor="let task of tasks" class="task-card">
+    <h3>{{ task.title }}</h3>
+    <p>{{ task.description }}</p>
+    <button (click)="editTask(task)">Edit</button>
+    <button (click)="deleteTask(task.id)">Delete</button>
+  </div>
+</div>

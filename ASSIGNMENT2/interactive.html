@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Greeting | SaralTech</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, rgba(230, 240, 255, 0.9), rgba(255, 255, 255, 0.9)),
+                  url('https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      background-blend-mode: lighten;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background-color: #003366;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+      position: relative;
+    }
+
+    header img {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      border-radius: 50%;
+    }
+
+    /* Navigation */
+    nav {
+      background-color: #0059b3;
+      padding: 1rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Interactive Section */
+    .container {
+      max-width: 600px;
+      margin: 3rem auto;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 2rem 3rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      border: 2px solid #0059b3;
+      text-align: center;
+    }
+
+    h2 {
+      color: #003366;
+      margin-bottom: 1rem;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 80%;
+      font-size: 1rem;
+      border: 2px solid #0059b3;
+      border-radius: 5px;
+      margin-top: 1rem;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 10px 20px;
+      background-color: #0059b3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #003366;
+    }
+
+    /* Message Styles */
+    .message {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #003366;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .message.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .message.error {
+      color: red;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #003366;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      margin-top: 2rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      input[type="text"] {
+        width: 100%;
+      }
+
+      .container {
+        padding: 1.5rem;
+      }
+
+      header img {
+        width: 50px;
+        height: 50px;
+        top: 10px;
+        left: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="https://media.licdn.com/dms/image/v2/D560BAQH_1Wd2P8wCug/company-logo_200_200/company-logo_200_200/0/1737156172896/24x7saraltech_logo?e=2147483647&v=beta&t=6mFKsQ3gjAGE4z61F0SWdHHRJWOfSCtG8f-uQwJN-3Q" alt="SaralTech Logo">
+    <h1>SaralTech</h1>
+    <p>Where Everything Becomes Saral</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>Welcome to SaralTech</h2>
+    <p>Enter your name below to receive a warm greeting from us!</p>
+    <input type="text" id="nameInput" placeholder="Your name here" />
+    <br>
+    <button onclick="greetUser()">Greet Me</button>
+    <div id="greetingMessage" class="message"></div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 SaralTech™. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function greetUser() {
+      const name = document.getElementById("nameInput").value.trim();
+      const messageDiv = document.getElementById("greetingMessage");
+
+      messageDiv.classList.remove("show", "error");
+      messageDiv.style.display = "none";
+      messageDiv.textContent = "";
+
+      if (name === "") {
+        messageDiv.classList.add("error");
+        messageDiv.textContent = "Please enter your name!";
+        messageDiv.style.display = "block";
+        setTimeout(() => {
+          messageDiv.classList.add("show");
+        }, 50);
+        return;
+      }
+
+      messageDiv.textContent = `Hello, ${name}! Welcome to SaralTech 🚀`;
+      messageDiv.style.display = "block";
+
+      setTimeout(() => {
+        messageDiv.classList.add("show");
+      }, 50);
+    }
+  </script>
+
+</body>
+</html>
